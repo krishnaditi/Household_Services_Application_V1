@@ -1,0 +1,80 @@
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: url('/static/background.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensure the background image covers the viewport */
+    margin: 0;
+    padding: 0;
+    padding-top: 100px; /* Add padding to account for the header */
+    color: #333; /* Neutral color for text */
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50; /* Green header */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed; /* Fixed header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Navigation Links */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    max-width: 1000px; /* Center and limit the width */
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Smooth corners */
+    overflow-x: auto; /* Handle table overflow */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label, input, textarea, select, button {
+    margin: 10px 0;
+}
+
+/* Header Container */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Spread elements across the container */
+    align-items: center; /* Vertically align items */
+    /* background-color: #4CAF50; */
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome Message */
+.header-container h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 24px;
+    color: white;
+}
+
+
