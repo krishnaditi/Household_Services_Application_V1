@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+<style>
+    /* Center the form */
+    form {
+        background-color: #f8f8f8;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 50px auto;
+    }
+
+    h2 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #555;
+        margin-top: 10px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+
+    /* Button styling */
+    button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 600px) {
+        form {
+            padding: 15px;
+            width: 90%;
+        }
+    }
+</style>
+
+<h2 style="padding: 30px;margin-bottom: auto;">User Registration</h2>
+
+<!-- Dropdown to select user type -->
+<h3 style="margin: auto;color: rgb(103, 103, 214);justify-content: center;align-items: center;display: flex;">Select User Type</h3>
+<select id="userType" onchange="toggleForm()" style="width: 100%;padding: 10px;margin-top: 5px;
+border-radius: 5px;border: 1px solid #ccc;font-size: 1em;box-sizing: border-box;">
+    <option value="none" selected disabled>Select User Type</option>
+    <option value="customer">Customer</option>
+    <option value="professional">Service Professional</option>
+</select>
+
+<!-- Customer Registration Form -->
+<form id="customerForm" method="POST" action="{{ url_for('customer_register') }}" style="display: none;margin: auto;">
+    <h3>Customer Registration</h3>
+
+    <div class="form-column">
+        <label for="customer_fullname">Full Name</label>
+        <input type="text" id="customer_fullname" name="customer_name" required>
+    </div>
+
+    <div class="form-column">
+        <label for="customer_username">Username</label>
+        <input type="text" id="customer_username" name="customer_username" required>
+    </div>
+
+    <div class="form-column">
+        <label for="customer_email">Email</label>
+        <input type="email" id="customer_email" name="customer_email" required>
+    </div>
+
+    <div class="form-column">
+        <label for="customer_phone">Phone Number</label>
+        <input type="tel" id="customer_phone" name="customer_phone_number" required>
+    </div>
+
+    <div class="form-column">
+        <label for="customer_password">Password</label>
+        <input type="password" id="customer_password" name="customer_password" required>
+    </div>
+
+    <button type="submit">Register as Customer</button>
+</form>
+
+
+<!-- Service Professional Registration Form -->
+<form id="professionalForm" method="POST" action="{{ url_for('professional_register') }}" style="display: none;margin: auto;">
+    <h3>Service Professional Registration</h3>
+
+    <div class="form-column">
+        <label for="professional_fullname">Full Name</label>
+        <input type="text" id="professional_fullname" name="professional_name" required>
+    </div>
+
+    <div class="form-column">
+        <label for="professional_username">Username</label>
+        <input type="text" id="professional_username" name="professional_username" required>
+    </div>
+
+    <div class="form-column">
+        <label for="professional_email">Email</label>
+        <input type="email" id="professional_email" name="professional_email" required>
+    </div>
+
+    <div class="form-column">
+        <label for="service_type">Service Type</label>
+        <input type="text" id="service_type" name="service_type" required>
+    </div>
+
+    <div class="form-column">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required>
+    </div>
+
+    <div class="form-column">
+        <label for="pincode">Pincode</label>
+        <input type="text" id="pincode" name="pincode" required>
+    </div>
+
+    <div class="form-column">
+        <label for="experience">Experience (years)</label>
+        <input type="number" id="experience" name="experience" min="0" required>
+    </div>
+
+    <div class="form-column">
+        <label for="professional_password">Password</label>
+        <input type="password" id="professional_password" name="professional_password" required>
+    </div>
+
+    <button type="submit">Register as Service Professional</button>
+</form>
+
+<script>
+    function toggleForm() {
+        const userType = document.getElementById("userType").value;
+        const customerForm = document.getElementById("customerForm");
+        const professionalForm = document.getElementById("professionalForm");
+
+        // Hide both forms initially
+        customerForm.style.display = "none";
+        professionalForm.style.display = "none";
+
+        // Show the appropriate form based on the selected user type
+        if (userType === "customer") {
+            customerForm.style.display = "block";
+        } else if (userType === "professional") {
+            professionalForm.style.display = "block";
+        }
+    }
+</script>
+
+{% endblock %}

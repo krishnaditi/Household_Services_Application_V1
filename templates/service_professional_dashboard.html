@@ -1,0 +1,114 @@
+<!-- templates/service_professional_dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Service Professional Dashboard{% endblock %}
+
+{% block content %}
+
+<style>
+    h3 {
+        text-decoration: underline;
+    }
+    /* Button styling */
+    button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<h2 style="padding: 50px;margin-bottom: auto;color: rgb(13, 51, 223);">Welcome, {{ professional.name }}!</h2>
+<form action="{{ url_for('user_login') }}" method="POST">
+    <button type="submit" class="btn btn-danger" style="margin-top: 35px;">Logout</button>
+</form>
+<p>Service Type: {{ professional.service_type }}</p>
+<p>Location: {{ professional.location }}</p>
+<p>Pincode: {{ professional.pincode }}</p>
+<p>Experience: {{ professional.experience }} years</p>
+
+<section>
+    <h3>Assigned Service Requests</h3>
+    {% if assigned_requests %}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Service Name</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in assigned_requests %}
+            <tr>
+                <td>{{ request.service.name }}</td>
+                <td>{{ request.customer.name }}</td>
+                <td>{{ request.customer.phone_number }}</td>
+                <td>{{ request.date_of_request.strftime('%Y-%m-%d') }}</td>
+                <td>{{ request.service_status }}</td>
+                <td>
+                    {% if request.service_status == "accepted" %}
+                    <form action="{{ url_for('mark_complete', request_id=request.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-primary btn-sm">Mark as Complete</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No assigned service requests.</p>
+    {% endif %}
+</section>
+
+<section>
+    <h3>Pending Service Requests</h3>
+    {% if pending_requests %}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Service Name</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Request Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in pending_requests %}
+            <tr>
+                <td>{{ request.service.name }}</td>
+                <td>{{ request.customer.name }}</td>
+                <td>{{ request.customer.phone_number }}</td>
+                <td>{{ request.date_of_request.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <form action="{{ url_for('accept_request', request_id=request.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                    </form>
+                    <form action="{{ url_for('reject_request', request_id=request.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No pending service requests available for your service type.</p>
+    {% endif %}
+</section>
+
+{% endblock %}

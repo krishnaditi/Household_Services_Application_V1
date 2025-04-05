@@ -1,0 +1,19 @@
+<!-- templates/create_service_request.html -->
+{% extends "base.html" %}
+
+{% block title %}Create Service Request{% endblock %}
+
+{% block content %}
+<h2>Create a New Service Request</h2>
+
+<form method="POST">
+    <label for="service_type">Service Type</label>
+    <input type="text" id="service_type" name="service_type" required>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+
+    <button type="submit">Submit Request</button>
+</form>
+
+{% endblock %}

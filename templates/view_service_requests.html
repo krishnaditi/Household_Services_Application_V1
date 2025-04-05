@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Service Requests{% endblock %}
+
+{% block content %}
+<h2>All Service Requests</h2>
+<ul>
+    {% for request in service_requests %}
+    <li>
+        Request ID: {{ request.id }} | Service: {{ request.service.name }} | Customer: {{ request.customer.name }}
+        | Status: {{ request.status }}
+        <!-- Add additional details as needed -->
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

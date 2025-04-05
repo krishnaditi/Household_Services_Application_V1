@@ -1,0 +1,27 @@
+<!-- templates/edit_service_request.html -->
+{% extends "base.html" %}
+
+{% block title %}Edit Service Request{% endblock %}
+
+{% block content %}
+<h2>Edit Service Request</h2>
+
+<form method="POST">
+    <label for="remarks">Remarks</label>
+    <textarea id="remarks" name="remarks" rows="4">{{ request.remarks }}</textarea>
+
+    <label for="status">Status</label>
+    <select id="status" name="status" required>
+        <option value="requested" {% if request.service_status == "requested" %}selected{% endif %}>Requested</option>
+        <option value="assigned" {% if request.service_status == "assigned" %}selected{% endif %}>Assigned</option>
+        <option value="closed" {% if request.service_status == "closed" %}selected{% endif %}>Closed</option>
+    </select>
+
+    <button type="submit">Update Request</button>
+</form>
+
+<form method="POST" action="{{ url_for('close_service_request', request_id=request.id) }}">
+    <button type="submit">Close Request</button>
+</form>
+
+{% endblock %}
